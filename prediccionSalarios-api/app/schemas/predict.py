@@ -1,12 +1,18 @@
 from typing import Any, List, Optional
-#from model.processing.validation import DataInputSchema
 from pydantic import BaseModel
 import pickle
 import pandas as pd
 import pycountry_convert as pc
 from catboost import CatBoostRegressor
 import os
- 
+
+# Esquema de los resultados de predicción
+class PredictionResults(BaseModel):
+    errors: Optional[Any]
+    version: str
+    predictions: Optional[Any]
+
+
 class DataInput(BaseModel):
     job_title: str
     experience_level: str
