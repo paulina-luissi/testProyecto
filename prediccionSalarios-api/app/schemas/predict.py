@@ -78,14 +78,22 @@ def preprocess_inputs(job_title, experience_level, employee_country, company_cou
     }])
 
 # Defir función para cargar el modelo
+# def load_model():
+#     model_path = os.path.join(os.path.dirname(__file__), '..', 'model-pkg', 'best_cbr_reg_model_country.pkl')
+#     with open(model_path, 'rb') as model_file:
+#         model = pickle.load(model_file)
+#     return model
+
 def load_model():
-    model_path = os.path.join(os.path.dirname(__file__), '..', 'model-pkg', 'best_cbr_reg_model_country.pkl')
+    model_path = os.path.join(os.path.dirname(__file__), '..', '..', 'model-pkg', 'best_cbr_reg_model_country.pkl')
+    
     with open(model_path, 'rb') as model_file:
         model = pickle.load(model_file)
     return model
 
 # Cargar el modelo
 model = load_model()
+
 
 def predict_salary(job_title, experience_level, employee_country, company_country):
     # Preprocess inputs
