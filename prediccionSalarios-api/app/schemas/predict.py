@@ -18,9 +18,10 @@ class DataInput(BaseModel):
     experience_level: str
     employee_country: str
     company_country: str
-    employment_type: str  # Tipo de empleo (Full_time, Part_time, etc.)
-    remote_ratio: str     # Porcentaje de trabajo remoto
-    company_size: str    # Tamaño de la empresa (Small, Medium, Large)
+    # Comentado porque no se usan en el modelo estas variables
+    # employment_type: str  # Tipo de empleo (Full_time, Part_time, etc.)
+    # remote_ratio: str     # Porcentaje de trabajo remoto
+    # company_size: str    # Tamaño de la empresa (Small, Medium, Large)
 
 class MultipleDataInputs(BaseModel):
     inputs: List[DataInput]  # Lista de objetos DataInput
@@ -32,20 +33,22 @@ class MultipleDataInputs(BaseModel):
                         "job_title": "Software Engineer",
                         "experience_level": "Mid_level",
                         "employee_country": "United States",
-                        "company_country": "United States",
-                        "employment_type": "Full_time",
-                        "remote_ratio": "< 20%",
-                        "company_size": "Large (> 250 employees)"
-                    },
-                    {
-                        "job_title": "Data Scientist",
-                        "experience_level": "Senior_level",
-                        "employee_country": "Canada",
-                        "company_country": "United States",
-                        "employment_type": "Contract",
-                        "remote_ratio": "50-80%",
-                        "company_size": "Medium (50-250 employees)"
-                    }
+                        "company_country": "United States"
+                        # Comentado porque no se usan en el modelo estas variables
+                        # ,
+                        # "employment_type": "Full_time",
+                        # "remote_ratio": "< 20%",
+                        # "company_size": "Large (> 250 employees)"
+                    }#,
+                    # {
+                    #     "job_title": "Data Scientist",
+                    #     "experience_level": "Senior_level",
+                    #     "employee_country": "Canada",
+                    #     "company_country": "United States",
+                    #     "employment_type": "Contract",
+                    #     "remote_ratio": "50-80%",
+                    #     "company_size": "Medium (50-250 employees)"
+                    # }
                 ]
             }
         }
@@ -82,13 +85,6 @@ def preprocess_inputs(job_title, experience_level, employee_country, company_cou
         'company_country': company_country,
         'employee_country': employee_country
     }])
-
-# Defir función para cargar el modelo
-# def load_model():
-#     model_path = os.path.join(os.path.dirname(__file__), '..', 'model-pkg', 'best_cbr_reg_model_country.pkl')
-#     with open(model_path, 'rb') as model_file:
-#         model = pickle.load(model_file)
-#     return model
 
 def load_model():
     model_path = os.path.join(os.path.dirname(__file__), '..', '..', 'model-pkg', 'best_cbr_reg_model_country.pkl')
