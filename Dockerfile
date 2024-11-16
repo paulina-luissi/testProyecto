@@ -6,8 +6,11 @@ RUN adduser --disabled-password --gecos '' api-user
 # Definir directorio de trabajo 
 WORKDIR /opt/prediccionSalarios-api
 
+ENV PYTHONPATH=/opt/prediccionSalarios-api
+
 # Instalar dependencias
 ADD ./prediccionSalarios-api /opt/prediccionSalarios-api/
+
 RUN pip install --upgrade pip
 RUN pip install -r /opt/prediccionSalarios-api/requirements.txt
 
@@ -22,3 +25,5 @@ EXPOSE 8001
 
 # Comandos a ejecutar al correr el contenedor 
 CMD ["bash", "./run.sh"]
+
+
