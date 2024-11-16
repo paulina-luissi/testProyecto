@@ -1,4 +1,5 @@
-from typing import List, Optional
+from typing import Any, List, Optional
+#from model.processing.validation import DataInputSchema
 from pydantic import BaseModel
 import pickle
 import pandas as pd
@@ -6,16 +7,7 @@ import pycountry_convert as pc
 from catboost import CatBoostRegressor
 import os
  
-
-# Definir los esquemas de entrada y salida para la API
-class PredictionResults(BaseModel):
-    errors: Optional[Any]
-    version: str
-    predictions: Optional[Any[float]]
-
-class MultipleDataInputs(BaseModel):
-    inputs: List[DataInputSchema]  # Aquí asumo que DataInputSchema define el formato de los datos individuales
-    # Campos adicionales que el modelo necesita según tu código:
+class DataInput(BaseModel):
     job_title: str
     experience_level: str
     employee_country: str
@@ -23,6 +15,9 @@ class MultipleDataInputs(BaseModel):
     employment_type: str  # Tipo de empleo (Full_time, Part_time, etc.)
     remote_ratio: str     # Porcentaje de trabajo remoto
     company_size: str    # Tamaño de la empresa (Small, Medium, Large)
+
+class MultipleDataInputs(BaseModel):
+    inputs: List[DataInput]  # Lista de objetos DataInput
     class Config:
         schema_extra = {
             "example": {
@@ -35,6 +30,15 @@ class MultipleDataInputs(BaseModel):
                         "employment_type": "Full_time",
                         "remote_ratio": "< 20%",
                         "company_size": "Large (> 250 employees)"
+                    },
+                    {
+                        "job_title": "Data Scientist",
+                        "experience_level": "Senior_level",
+                        "employee_country": "Canada",
+                        "company_country": "United States",
+                        "employment_type": "Contract",
+                        "remote_ratio": "50-80%",
+                        "company_size": "Medium (50-250 employees)"
                     }
                 ]
             }
